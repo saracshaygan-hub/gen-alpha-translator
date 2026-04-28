@@ -1,4 +1,4 @@
-const API_KEY = "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";
+const API_KEY = "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";
 
 document.getElementById("translateBtn").onclick = async () => {
   const text = document.getElementById("inputText").value;
