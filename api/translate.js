@@ -1,6 +1,6 @@
 export default async function handler(req, res) {
   if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
+    return res.status(405).json({ error: "Only POST allowed" });
   }
 
   try {
@@ -8,14 +8,8 @@ export default async function handler(req, res) {
 
     const prompt =
       mode === "alpha"
-        ? `Translate this into Gen Alpha slang.
-Tone: ${tone}
-No explanation.
-
-"${text}"`
-        : `Translate this Gen Alpha slang into clear English.
-
-"${text}"`;
+        ? `Translate into Gen Alpha slang. Tone: ${tone}. No explanation.\n\n"${text}"`
+        : `Translate Gen Alpha slang into clear English.\n\n"${text}"`;
 
     const response = await fetch("https://api.openai.com/v1/responses", {
       method: "POST",
@@ -33,12 +27,12 @@ No explanation.
 
     const output =
       data?.output?.[0]?.content?.[0]?.text ||
-      "No response from AI";
+      "No response";
 
-    return res.status(200).json({ output });
+    res.status(200).json({ output });
 
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ error: "Server error" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server error" });
   }
 }
