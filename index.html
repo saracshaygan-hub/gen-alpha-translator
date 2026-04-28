@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gen Alpha Translator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="container">
+    <h1>Gen Alpha Translator</h1>
+
+    <textarea id="inputText" placeholder="Type something..."></textarea>
+
+    <div class="controls">
+      <select id="mode">
+        <option value="alpha">English → Gen Alpha</option>
+        <option value="english">Gen Alpha → English</option>
+      </select>
+
+      <select id="tone">
+        <option>Mild</option>
+        <option>Medium</option>
+        <option>Unhinged</option>
+      </select>
+    </div>
+
+    <button id="translateBtn">Translate</button>
+
+    <div id="outputBox"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
