@@ -1,4 +1,8 @@
 export default async function handler(req, res) {
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
+  }
+
   try {
     const { text, mode, tone } = req.body;
 
@@ -31,10 +35,10 @@ No explanation.
       data?.output?.[0]?.content?.[0]?.text ||
       "No response from AI";
 
-    res.status(200).json({ output });
+    return res.status(200).json({ output });
 
   } catch (error) {
     console.error(error);
-    res.status(500).json({ output: "Server error" });
+    return res.status(500).json({ error: "Server error" });
   }
 }
