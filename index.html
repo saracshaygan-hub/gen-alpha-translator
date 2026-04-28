@@ -1,35 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
   <title>Gen Alpha Translator</title>
-  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body style="font-family: Arial; padding: 40px; max-width: 500px; margin: auto;">
 
-  <div class="container">
-    <h1>Gen Alpha Translator</h1>
+  <h2>Gen Alpha Translator</h2>
 
-    <textarea id="inputText" placeholder="Type something..."></textarea>
+  <textarea id="input" style="width:100%; height:100px;"></textarea>
 
-    <div class="controls">
-      <select id="mode">
-        <option value="alpha">English → Gen Alpha</option>
-        <option value="english">Gen Alpha → English</option>
-      </select>
+  <br><br>
 
-      <select id="tone">
-        <option>Mild</option>
-        <option>Medium</option>
-        <option>Unhinged</option>
-      </select>
-    </div>
+  <select id="mode">
+    <option value="alpha">English → Gen Alpha</option>
+    <option value="english">Gen Alpha → English</option>
+  </select>
 
-    <button id="translateBtn">Translate</button>
+  <select id="tone">
+    <option>Mild</option>
+    <option>Medium</option>
+    <option>Unhinged</option>
+  </select>
 
-    <div id="outputBox"></div>
-  </div>
+  <br><br>
 
-  <script src="script.js"></script>
+  <button onclick="translate()">Translate</button>
+
+  <p id="output"></p>
+
+  <script>
+    async function translate() {
+      const text = document.getElementById("input").value;
+      const mode = document.getElementById("mode").value;
+      const tone = document.getElementById("tone").value;
+
+      document.getElementById("output").innerText = "Translating...";
+
+      const res = await fetch("/api/translate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ text, mode, tone })
+      });
+
+      const data = await res.json();
+      document.getElementById("output").innerText = data.output;
+    }
+  </script>
+
 </body>
 </html>
