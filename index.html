@@ -24,12 +24,12 @@
 
   <br><br>
 
-  <button onclick="runTranslation()">Translate</button>
+  <button onclick="doTranslation()">Translate</button>
 
   <p id="output"></p>
 
   <script>
-    async function runTranslation() {
+    async function doTranslation() {
       const text = document.getElementById("input").value;
       const mode = document.getElementById("mode").value;
       const tone = document.getElementById("tone").value;
