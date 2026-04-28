@@ -1,4 +1,4 @@
-const API_KEY = "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";
+const API_KEY = "";
 
 document.getElementById("translateBtn").onclick = async () => {
   const text = document.getElementById("inputText").value;
